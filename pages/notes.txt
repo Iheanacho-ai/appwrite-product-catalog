@@ -1,0 +1,76 @@
+<div className='product-catalog'>
+       <h3 className='product-catalog-h3'>E-commerce Product Catalog</h3> 
+      <div className="product-catalog-container">
+        <div className="product-catalog-input">
+          <form action="">
+            <label htmlFor="input">Product Name</label>
+            <input type="text" name="Product Name" className='txt-field' value={productName} onChange= {(e)=> setProductName(e.target.value)}/> 
+            <label htmlFor="input">Price</label>
+            <input type="number" className='num-field' value={productPrice} onChange= {(e)=> setProductPrice(e.target.value)} />
+            <label htmlFor="input">Product Description</label>
+            <input type="text"  className='desc-field' value={productDesc} onChange= {(e)=> setproductDesc(e.target.value)} />
+            <div className='btn' onClick={handleProductCatalog}>Add Product</div>
+          </form>
+        </div>
+      </div>
+      <div className="product-list">
+        <div className="product-list-container">
+          {
+            productList ? (
+              <div className="product-item-container">
+                {
+                  productList.map(({productName, productPrice, productDesc, $id}) => (
+                    <div className="product-item" id = {$id}>
+                      <div className="product-item-desc">
+                        <div>{productDesc}</div>
+                      </div>
+                      <div className="summary">
+                        <p>{productName}</p>
+                        <p>${productPrice}</p>
+                      </div>
+                      <div className="btn" onClick={()=> handleDelete($id)}>Delete Product</div>
+                    </div>
+                  ))
+                }
+              </div>
+            ) : <div>Create Product</div>
+          }
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <a href="#" class="group">
+              <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75" />
+              </div>
+              <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+              <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+            </a>
+
+            <a href="#" class="group">
+              <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="w-full h-full object-center object-cover group-hover:opacity-75" />
+              </div>
+              <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
+              <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+            </a>
+
+            <a href="#" class="group">
+              <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="Person using a pen to cross a task off a productivity paper card." class="w-full h-full object-center object-cover group-hover:opacity-75" />
+              </div>
+              <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
+              <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
+            </a>
+
+            <a href="#" class="group">
+              <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg" alt="Hand holding black machined steel mechanical pencil with brass tip and top." class="w-full h-full object-center object-cover group-hover:opacity-75" />
+              </div>
+              <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
+              <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+            </a>
