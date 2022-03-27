@@ -13,7 +13,7 @@ const Home = () => {
 
   sdk
     .setEndpoint('http://localhost/v1') // Your API Endpoint
-    .setProject('6239ecdd936113de4ec2') // Your project ID
+    .setProject('624097c3b563197d2e09') // Your project ID
   ;
 
     //Creating anonymous Session
@@ -36,14 +36,20 @@ const Home = () => {
     
     
   const listProducts = async () => {
-    let response = await sdk.database.listDocuments('6239ed08a0e1d12624f5');
-    setProductList(response.documents)
+    try {
+      let response = await sdk.database.listDocuments('624098515dbd1ae68ea2');
+      setProductList(response.documents)
+    } catch (error) {
+      console.log(error)
+      
+    }
+    
   }
 
   const handleProductCatalog = async () => {
 
     try{
-      let promise = await sdk.database.createDocument('6239ed08a0e1d12624f5', 'unique()', {
+      let promise = await sdk.database.createDocument('624098515dbd1ae68ea2', 'unique()', {
         "productName" : productName,
         "productPrice": productPrice,
         "productImage": productImage
@@ -67,9 +73,14 @@ const Home = () => {
 
 
   const handleDelete = async (documentid) => {
-   await sdk.database.deleteDocument('6239ed08a0e1d12624f5', documentid);
-    alert("item have been deleted successfully")
-    listProducts()
+    try {
+      await sdk.database.deleteDocument('624098515dbd1ae68ea2', documentid);
+      alert("item have been deleted successfully")
+      listProducts()
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 
@@ -91,7 +102,7 @@ const Home = () => {
                     value = {productName}
                     onChange= {(e)=> setProductName(e.target.value)}
                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                    defaultValue={''} />
+                     />
                 </div>
                 
               </div>
@@ -148,27 +159,27 @@ const Home = () => {
         </form>
 
       </div>
-      <div class="bg-white">
-        <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 class="sr-only">Products</h2>
+      <div className="bg-white">
+        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h2 className="sr-only">Products</h2>
           {
             productList ? (
-              <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+              <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 {
                   productList.map(({productName, productImage, productPrice, $id}) => (
-                    <a href="#" class="group" id={$id}>
-                      <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                        <img src={productImage} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75" />
+                    <a href="#" className="group" id={$id}>
+                      <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                        <img src={productImage} alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="w-full h-full object-center object-cover group-hover:opacity-75" />
                       </div>
-                      <h3 class="mt-4 text-sm text-gray-700">{productName}</h3>
-                      <p class="mt-1 text-lg font-medium text-gray-900">${productPrice}</p>
-                      <div
-                        type="submit"
+                      <h3 className="mt-4 text-sm text-gray-700">{productName}</h3>
+                      <p className="mt-1 text-lg font-medium text-gray-900">${productPrice}</p>
+                      <button
+                        type="button"
                         className="cursor inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         onClick={()=> handleDelete($id)}
                       >
                       Delete
-                    </div>
+                    </button>
                     </a>
                   ))
                 }
